@@ -13,13 +13,13 @@ class Movie {
         const movie = {
             title: req.body.title,
             overview: req.body.overview,
-            poster_path: req.body.poster,
+            poster_path: req.body.poster_path,
             popularity: req.body.popularity,
             tags: req.body.tags
         }
         movieModel.create(req.db, movie)
             .then(result => {
-                res.status(200).json(result)
+                res.status(200).json({result: result.ops[0]})
             })
             .catch(err => console.log(err))
     }
@@ -28,8 +28,10 @@ class Movie {
         const id = req.params.id
         const db =  req.db
         movieModel.delete(db, id)
-            .then(result => {
-                res.status(200).json(result)
+            .then(_ => {
+                res.status(200).json({
+                    msg: 'Delete success'
+                })
             })
             .catch(err => console.log(err))
     }
@@ -40,7 +42,7 @@ class Movie {
         const updatedMovie = {
             title: req.body.title,
             overview: req.body.overview,
-            poster_path: req.body.poster,
+            poster_path: req.body.poster_path,
             popularity: req.body.popularity,
             tags: req.body.tags
         }

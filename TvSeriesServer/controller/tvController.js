@@ -10,16 +10,17 @@ class Tv {
     }
 
     static create (req, res) {
+        console.log(req.body)
         const tvseries = {
             title: req.body.title,
             overview: req.body.overview,
-            poster_path: req.body.poster,
+            poster_path: req.body.poster_path,
             popularity: req.body.popularity,
             tags: req.body.tags
         }
         tvModel.create(req.db, tvseries)
             .then(result => {
-                res.status(200).json(result)
+                res.status(200).json({result: result.ops[0]})
             })
             .catch(err => console.log(err))
     }
@@ -29,7 +30,9 @@ class Tv {
         const db = req.db
         tvModel.delete(db, id) 
             .then(result => {
-                res.status(200).json(result)
+                res.status(200).json({
+                    msg: 'Delete success'
+                })
             })
             .catch(err => console.log(err))
     }
@@ -40,7 +43,7 @@ class Tv {
         const updatedTv = {
             title: req.body.title,
             overview: req.body.overview,
-            poster_path: req.body.poster,
+            poster_path: req.body.poster_path,
             popularity: req.body.popularity,
             tags: req.body.tags
         }
