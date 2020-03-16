@@ -76,12 +76,12 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addNewMovie(input: NewDataMovie): Movie
-        addNewTv(input: NewDataTvSeries): Tvseries
-        deleteMovie(_id: ID!): Movie
-        deleteTv(_id: ID!): Tvseries
-        editMovie(input: EditDataMovie): Movie
-        editTv(input: EditDataTv): Tvseries
+        addNewMovie(title:String, overview: String, poster_path: String, popularity: Float, tags:[String]): Movie
+        addNewTv(title:String, overview: String, poster_path: String, popularity: Float, tags:[String]): Tvseries
+        deleteMovie(_id: String): Movie
+        deleteTv(_id: String): Tvseries
+        editMovie(_id:String,title:String, overview: String, poster_path: String, popularity: Float, tags:[String]): Movie
+        editTv(_id:String,title:String, overview: String, poster_path: String, popularity: Float, tags:[String]): Tvseries
     }
 `;
 
@@ -89,12 +89,8 @@ const resolvers = {
     Query: {
         getMovies: async () => {
             try {
-                const allDataMovie = await redis.get('allDataMovie')
-                
-                if (allDataMovie) return JSON.parse(allDataMovie)
-
                 const { data } = await axios.get('http://localhost:3001/movies')
-                const {_} = await redis.set('allDataMovie', JSON.stringify(data))
+                console.log(data, "INI GET MOVIE")
                 return data
             } catch {
                 throw new Error
@@ -102,12 +98,7 @@ const resolvers = {
         },
         getTv: async () => {
             try {
-                const allDataTv = await redis.get('allDataTv')
-
-                if (allDataTv) return JSON.parse(allDataTv)
-
                 const { data } = await axios.get('http://localhost:3002/tvseries')
-                const {_} = await redis.set('allDataTv', JSON.stringify(data))
                 return data
             } catch {
                 throw new Error
@@ -115,18 +106,21 @@ const resolvers = {
         }
     },
     Mutation: {
-        addNewMovie: async (_, { input }) => {
+        addNewMovie: async (_, args) => {
             try {
-                const _ = await redis.del('allDataMovie')
+                const { title, overview, poster_path, popularity, tags } = args
+                const input = { title, overview, poster_path, popularity, tags }
                 const result = await axios.post('http://localhost:3001/movies', input)
                 return result.data.result
             } catch {
+                console.error()
                 throw new Error
             }
         },
-        addNewTv: async (_, { input }) => {
+        addNewTv: async (_, args) => {
             try {
-                const _ = await redis.del('allDataTv')
+                const { title, overview, poster_path, popularity, tags } = args
+                const input = { title, overview, poster_path, popularity, tags }
                 const result = await axios.post('http://localhost:3002/tvseries', input)
                 return result.data.result
             } catch {
@@ -135,7 +129,6 @@ const resolvers = {
         },
         deleteMovie: async (_, { _id }) => {
             try {
-                const _ = await redis.del('allDataMovie')
                 const result = await axios.delete('http://localhost:3001/movies/' + _id)
                 return result
             } catch {
@@ -144,29 +137,28 @@ const resolvers = {
         },
         deleteTv: async (_, { _id }) => {
             try {
-                const _ = await redis.del('allDataTv')
                 const result = await axios.delete('http://localhost:3002/tvseries/' + _id)
                 return result
             } catch {
                 throw new Error
             }
         },
-        editMovie: async (_, { input }) => {
+        editMovie: async (_, args) => {
             try {
-                const _ = await redis.del('allDataMovie')
-                const _id = input._id
+                const { _id, title, overview, poster_path, popularity, tags } = args
+                const input = { title, overview, poster_path, popularity, tags }
                 const result = await axios.patch('http://localhost:3001/movies/' + _id, input)
-                return result
+                return args
             } catch {
                 throw new Error
             }
         },
-        editTv: async (_, { input }) => {
+        editTv: async (_, args) => {
             try {
-                const _ = await redis.del('allDataTv')
-                const _id = input._id
+                const { _id, title, overview, poster_path, popularity, tags } = args
+                const input = { title, overview, poster_path, popularity, tags }
                 const result = await axios.patch('http://localhost:3002/tvseries/' + _id, input)
-                return result
+                return args
             } catch {
                 throw new Error
             }

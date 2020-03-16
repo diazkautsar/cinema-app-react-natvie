@@ -9,27 +9,41 @@ const PORT = 3001;
 
 const dbName = 'EntertainMe'
 
-const insertMovie = function(db, callback) {
-    const movies = db.collection('movies')
-    movies.insertMany([
-        {
-            title: 'Jan Darra',
-            overview: 'Good',
-            poster_path: 'https://m.media-amazon.com/images/M/MV5BN2FmZjQ1YmItZGI5OC00NmM2LTliZGUtZmNmZjkyOTA0OGNhXkEyXkFqcGdeQXVyMzU4Nzk4MDI@._V1_UY1200_CR85,0,630,1200_AL_.jpg',
-            popularity: 9.8,
-            tags: ['drama', 'romance']
-        },
-        {
-            title: 'Jan Darra Finale',
-            overview: 'Good',
-            poster_path: 'https://m.media-amazon.com/images/M/MV5BN2FmZjQ1YmItZGI5OC00NmM2LTliZGUtZmNmZjkyOTA0OGNhXkEyXkFqcGdeQXVyMzU4Nzk4MDI@._V1_UY1200_CR85,0,630,1200_AL_.jpg',
-            popularity: 9.5,
-            tags: ['drama', 'romance']
-        }
-    ], (err, result) => {
-        callback(result)
-    })
-}
+// const insertMovie = function(db, callback) {
+//     const movies = db.collection('movies')
+//     movies.insertMany([
+//         {
+//             title: 'Parasite',
+//             overview: 'Good',
+//             poster_path: 'https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_UY1200_CR90,0,630,1200_AL_.jpg',
+//             popularity: 8.6,
+//             tags: ['Comedy', 'Drama', 'Thriller']
+//         },
+//         {
+//             title: '1917',
+//             overview: 'Good',
+//             poster_path: 'https://m.media-amazon.com/images/M/MV5BOTdmNTFjNDEtNzg0My00ZjkxLTg1ZDAtZTdkMDc2ZmFiNWQ1XkEyXkFqcGdeQXVyNTAzNzgwNTg@._V1_UX182_CR0,0,182,268_AL_.jpg',
+//             popularity: 8.4,
+//             tags: ['Drama', 'War']
+//         }, 
+//         {
+//             title: 'Knives Out',
+//             overview: 'Good',
+//             poster_path: 'https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_.jpg',
+//             popularity: 8.0,
+//             tags: ['Comedy', 'Crime', 'Drama']
+//         }, 
+//         {
+//             title: 'Joker',
+//             overview: 'Good',
+//             poster_path: 'https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
+//             popularity: 8.6,
+//             tags: ['Thriller', 'Crime', 'Drama']
+//         }
+//     ], (err, result) => {
+//         callback(result)
+//     })
+// }
 
 client.connect(function(err) {
     app.use(express.json())
