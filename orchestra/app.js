@@ -90,7 +90,6 @@ const resolvers = {
         getMovies: async () => {
             try {
                 const { data } = await axios.get('http://localhost:3001/movies')
-                console.log(data, "INI GET MOVIE")
                 return data
             } catch {
                 throw new Error
@@ -113,7 +112,6 @@ const resolvers = {
                 const result = await axios.post('http://localhost:3001/movies', input)
                 return result.data.result
             } catch {
-                console.error()
                 throw new Error
             }
         },

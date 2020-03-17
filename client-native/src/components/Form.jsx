@@ -22,7 +22,6 @@ export default function Form({ navigation, route }) {
     const [addMovie] = useMutation(ADD_MOVIE, {
         update(cache, { data: { addNewMovie } }) {
             const { getMovies } = cache.readQuery({ query: ALL_MOVIE })
-            console.log(getMovies)
             cache.writeQuery({
                 query: ALL_MOVIE,
                 data: { getMovies: getMovies.concat([addNewMovie]) }

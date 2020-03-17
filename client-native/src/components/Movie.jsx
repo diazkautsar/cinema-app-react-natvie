@@ -5,9 +5,7 @@ import {
     Image,
     ScrollView,
     StyleSheet,
-    Button,
-    TouchableHighlight,
-    Alert
+    Button
 } from 'react-native'
 
 import { useQuery } from '@apollo/react-hooks'
