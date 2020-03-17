@@ -40,41 +40,7 @@ const typeDefs = gql`
         getMovies: [Movie]
         getTv: [Tvseries]
     }
-
-    input NewDataMovie {
-        title: String
-        overview: String
-        poster_path: String
-        popularity: Float
-        tags: [String]
-    }
-
-    input NewDataTvSeries {
-        title: String
-        overview: String
-        poster_path: String
-        popularity: Float
-        tags: [String]
-    }
-
-    input EditDataMovie {
-        _id: ID!
-        title: String
-        overview: String
-        poster_path: String
-        popularity: Float
-        tags: [String]
-    }
-
-    input EditDataTv {
-        _id: ID!
-        title: String
-        overview: String
-        poster_path: String
-        popularity: Float
-        tags: [String]
-    }
-
+    
     type Mutation {
         addNewMovie(title:String, overview: String, poster_path: String, popularity: Float, tags:[String]): Movie
         addNewTv(title:String, overview: String, poster_path: String, popularity: Float, tags:[String]): Tvseries

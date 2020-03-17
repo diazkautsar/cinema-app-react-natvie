@@ -57,15 +57,18 @@ export default function Detail({ navigation, route }) {
     return (
         <View style={styles.container}>
             <View style={{ alignItems: 'center' }}>
-                <Text>{title}</Text>
+                <Text style={{ fontWeight: 'bold' }}>{title}</Text>
             </View>
             <Image
                 style={styles.image}
-                source={{ uri: `${poster_path}`, height: 400, width: 300 }}
+                source={{ uri: `${poster_path}`, height: 300, width: 250 }}
             />
             <View style={{ alignItems: 'center' }}>
+                <Text style={{ fontWeight: 'bold' }}>Rating: </Text>
                 <Text>{popularity}</Text>
+                <Text style={{ fontWeight: 'bold' }}>Overview: </Text>
                 <Text>{overview}</Text>
+                <Text style={{ fontWeight: 'bold' }}>Genre</Text>
                 <Text>{tags.join(", ")}</Text>
             </View>
             <View style={{

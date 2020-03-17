@@ -52,7 +52,7 @@ export default function Tvseries({ navigation, route }) {
             </View>
             <ScrollView horizontal={true} style={styles.container}>
                 {data.getTv.map(el => (
-                    <View style={{ marginTop: 25 }} key={el._id}>
+                    <View style={{ marginTop: 10 }} key={el._id}>
                         <View style={{ alignItems: 'center' }}>
                             <Text>{el.title}</Text>
                         </View>
@@ -61,7 +61,7 @@ export default function Tvseries({ navigation, route }) {
                             key={el._id}
                             source={{ uri: `${el.poster_path}`, height: 400, width: 300 }}
                         />
-                        <View style={{ alignItems: 'center' }}>
+                        <View style={{ alignItems: 'center', marginBottom: 25 }}>
                             <Button 
                             title="DETAIL"
                             onPress = {() => handlerToDetail(el)}

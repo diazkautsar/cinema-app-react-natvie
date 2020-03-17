@@ -4,7 +4,8 @@ import {
     Text,
     TextInput,
     StyleSheet,
-    Button
+    Button,
+    KeyboardAvoidingView
 } from 'react-native'
 
 import { ADD_MOVIE, ALL_MOVIE, ADD_TV, ALL_TV } from '../Apollo/query'
@@ -28,7 +29,7 @@ export default function Form({ navigation, route }) {
             })
         }
     })
-    
+
     const [addTv] = useMutation(ADD_TV, {
         update(cache, { data: { addNewTv } }) {
             const { getTv } = cache.readQuery({ query: ALL_TV })
@@ -41,7 +42,7 @@ export default function Form({ navigation, route }) {
 
     const handleOnSubmit = () => {
         if (param === 'Movie') {
-            addMovie({ variables: { title, overview, poster_path, popularity: +popularity, tags } } )
+            addMovie({ variables: { title, overview, poster_path, popularity: +popularity, tags } })
         } else if (param === 'Tv') {
             addTv({ variables: { title, overview, poster_path, popularity: +popularity, tags } })
         }
@@ -54,7 +55,7 @@ export default function Form({ navigation, route }) {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} enabled>
             <Text>Title: </Text>
             <TextInput
                 style={styles.textInput}
@@ -97,7 +98,7 @@ export default function Form({ navigation, route }) {
                     onPress={handleOnSubmit}
                 />
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 

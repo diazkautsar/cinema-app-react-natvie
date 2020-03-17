@@ -2,7 +2,8 @@ import React from 'react';
 import {
     StyleSheet,
     View,
-    Button
+    Button,
+    Text
 } from 'react-native'
 
 export default function Home({ navigation }) {
@@ -14,6 +15,9 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <View>
+                <Text>ENTERTAIN ME</Text>
+            </View>
             <View style={{ margin: 10 }}>
                 <Button 
                 title="MOVIE LIST"

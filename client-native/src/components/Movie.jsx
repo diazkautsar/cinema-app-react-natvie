@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Text,
     View,
@@ -61,7 +61,7 @@ export default function Movie({ navigation, route }) {
                             key={el._id}
                             source={{ uri: `${el.poster_path}`, height: 400, width: 300 }}
                         />
-                        <View style={{ alignItems: 'center' }}>
+                        <View style={{ alignItems: 'center', marginBottom: 25 }}>
                             <Button 
                             title="DETAIL"
                             onPress = {() => handlerToDetail(el)}
